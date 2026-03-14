@@ -37,10 +37,17 @@ export class Rendering
 
     async setRenderer()
     {
+        // Safari & mobile browsers have WebGPU bugs (drawIndexed, zero-sized buffers).
+        // Force WebGL fallback for stability.
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+            (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent))
+        const isMobileSize = Math.min(window.innerWidth, this.game.viewport.width) < 768
+        const forceWebGL = isSafari || isMobileSize
+
         this.renderer = new THREE.WebGPURenderer({
             canvas: this.game.canvasElement,
             powerPreference: 'high-performance',
-            forceWebGL: false,
+            forceWebGL,
             antialias: this.game.viewport.pixelRatio < 2
         })
         this.renderer.setSize(this.game.viewport.width, this.game.viewport.height)
