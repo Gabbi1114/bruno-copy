@@ -64,6 +64,18 @@ To trigger a deploy without pushing code:
 2. Select **Deploy to GitHub Pages**
 3. Click **Run workflow** → **Run workflow**
 
+## Why the copy had more errors than the original
+
+The original bruno-simon.com and your copy use the same code, but deployment and environment differ:
+
+| Issue | Cause | Fix applied |
+|-------|-------|-------------|
+| **"WebGL context was not allowed to start"** | Mobile browsers (Safari, etc.) require a user gesture before WebGL/WebGPU can start. The game was starting on load. | Added a "Tap to start" overlay so the game only starts after the user taps. |
+| **createImageBitmap / "unsigned long" errors** | Safari has known issues with `createImageBitmap`. Can appear when WebGL init is blocked or during texture loading. | The user-gesture gate reduces these by ensuring WebGL starts only after a valid user interaction. |
+| **Preload "not used" warnings** | Absolute paths (`/respawns/...`) broke when deployed to a subdirectory (`/bruno-copy/`). | Switched preload and asset links to relative paths (`./respawns/...`). |
+
+The original site may appear to work better because it’s often tested on desktop (where the user-gesture rule is looser) or because of different hosting/CDN behavior.
+
 ## Troubleshooting
 
 | Problem | Solution |

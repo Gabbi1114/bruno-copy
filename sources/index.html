@@ -29,17 +29,17 @@
     
     <link rel="stylesheet" href="./style/index.styl">
 
-    <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" loading="lazy" />
-    <link rel="shortcut icon" href="/favicons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicons/favicon.svg" loading="lazy" />
+    <link rel="shortcut icon" href="./favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Bruno's" />
-    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
 
-    <link rel="preload" href="/respawns/respawnsReferences-compressed.glb" as="fetch" crossorigin>
-    <link rel="preload" href="/behindTheScene/stars.ktx" as="fetch" crossorigin>
-    <link rel="preload" href="/intro/sound.ktx" as="fetch" crossorigin>
-    <link rel="preload" href="/palette.ktx" as="fetch" crossorigin>
+    <link rel="preload" href="./respawns/respawnsReferences-compressed.glb" as="fetch" crossorigin>
+    <link rel="preload" href="./behindTheScene/stars.ktx" as="fetch" crossorigin>
+    <link rel="preload" href="./intro/sound.ktx" as="fetch" crossorigin>
+    <link rel="preload" href="./palette.ktx" as="fetch" crossorigin>
     
     <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JMSN30BQ5J"></script>
@@ -52,6 +52,13 @@
     </script>
 </head>
 <body>
+
+    <!-- Blocks WebGL/WebGPU until user taps - required by mobile Safari & others -->
+    <div id="js-user-gesture-gate" class="user-gesture-gate">
+        <div class="user-gesture-gate-inner">
+            <p>Tap to start</p>
+        </div>
+    </div>
 
     <div class="js-fonts-loader fonts-loader">
         <div class="font nunito" data-font="400 20px Nunito"> </div>
